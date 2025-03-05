@@ -79,6 +79,7 @@ sim.gatherData()
 # sim.gatherDataFromFiles()
 
 sim.simData['numSampledCellsPerLayer'] = cfg.numSampledCellsPerLayer
+sim.simData['numSampledCellsPerLayer'] = cfg.numSampledCellsPerLayer
 
 sim.saveData()                    			# save params, cell info and sim output to file (pickle,mat,txt,etc)#
 sim.analysis.plotData()         			# plot spike raster etc
