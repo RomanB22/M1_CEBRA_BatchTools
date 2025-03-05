@@ -154,6 +154,18 @@ def setRunCfg(b, type='mpi_bulletin'):
             'script': 'src/init.py',
             'skip': True}
 
+    elif type == 'hpc_sge_evol':
+        b.runCfg = {'type': 'hpc_sge',
+                    'jobName': 'M1_CR',
+                    'cores': 19,
+                    'log': os.getcwd() + '/' + b.batchLabel + '.log',
+                    'mpiCommand': 'mpiexec',
+                    'vmem': '90G',
+                    'walltime': "15:00:00",
+                    'script': 'src/init.py',
+                    'queueName': 'cpu.q',
+                    'skip': False}
+
 # ----------------------------------------------------------------------------------------------
 # Main code
 # ----------------------------------------------------------------------------------------------
