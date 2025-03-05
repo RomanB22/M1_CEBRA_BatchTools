@@ -303,6 +303,11 @@ if cfg.addLongConn:
             netParams.popParams[longPop].pop('rate')
             netParams.popParams[longPop]['spkTimes'] = spks
 
+    if cfg.addInVivoThalamus:
+        netParams.popParams['ThalamusInVivo'] = {'cellModel': 'VecStim',
+                                                 'numCells': len(cfg.spikeTimesInVivo),
+                                                 'spkTimes': cfg.spikeTimesInVivo,
+                                                 'ynormRange': layer['long'+'TVL']}
 
 #------------------------------------------------------------------------------
 # Synaptic mechanism parameters
@@ -537,6 +542,22 @@ if cfg.addLongConn:
                             'synsPerConn': cfg.synsperconn[cellModel],
                             'sec': 'spiny'}
 
+    if cfg.addInVivoThalamus:
+        for ct in cellTypes:
+            for EorI in ['exc', 'inh']:
+                for i, (binRange, convergence) in enumerate(zip(binsLong[('TVL', ct)], cmatLong[('TVL', ct, EorI)])):
+                    for cellModel in cellModels:
+                        ruleLabel = 'ThalamusInVivo'+'_'+ct+'_'+EorI+'_'+cellModel+'_'+str(i)
+                        netParams.connParams[ruleLabel] = {
+                            'preConds': {'pop': 'ThalamusInVivo'},
+                            'postConds': {'cellModel': cellModel, 'cellType': ct, 'ynorm': list(binRange)},
+                            'synMech': syns[EorI],
+                            'convergence': convergence,
+                            'weight': cfg.weightLong['TVL'] / cfg.synsperconn[cellModel],
+                            'synMechWeightFactor': cfg.synWeightFractionEE,
+                            'delay': 'defaultDelay+dist_3D/propVelocity',
+                            'synsPerConn': cfg.synsperconn[cellModel],
+                            'sec': 'spiny'}
 
 #------------------------------------------------------------------------------
 # Subcellular connectivity (synaptic distributions)
@@ -579,7 +600,6 @@ if cfg.addSubConn:
         'sec': 'spiny',
         'groupSynMechs': ESynMech, 
         'density': {'type': '1Dmap', 'gridX': None, 'gridY': gridY, 'gridValues': synDens[k], 'fixedSomaY': fixedSomaY}} 
-
 
     #------------------------------------------------------------------------------
     # S1, S2, cM1 -> E IT/CT; no data, assume uniform over spiny
@@ -658,24 +678,6 @@ if cfg.addSubConn:
         'sec': 'spiny',
         'groupSynMechs': ESynMech,
         'density': 'uniform'} 
-
-#------------------------------------------------------------------------------
-# In Vivo thalamic inputs
-#------------------------------------------------------------------------------
-if cfg.addInVivoThalamus:
-    netParams.popParams['ThalamicSpikes'] = {'cellModel': 'VecStim',
-                                             'numCells': len(cfg.spikeTimesInVivo),
-                                             'spkTimes': cfg.spikeTimesInVivo}
-
-    netParams.connParams['ThalamicSpikes->M1'] = {
-        'preConds': {'popLabel': 'ThalamicSpikes'},
-        'postConds': {'ynorm': [0., 1.]},
-        'weight': cfg.weightThalamicSpikes,
-        'synsPerConn': 1,
-        'sec': 'spiny',
-        'delay': 'defaultDelay+dist_3D/propVelocity',
-        'loc': 0.5,
-        'synMech': ESynMech}
 
 #------------------------------------------------------------------------------
 # Description

@@ -80,7 +80,8 @@ cfg.gpu = False
 cfg.random123 = False
 cfg.progressBar = 0
 cfg.workingDir = os.getcwd()
-cfg.simLabel = 'v103_tune1'
+cfg.addInVivoThalamus = True
+cfg.simLabel = 'v103_tune1_InVi_MTh'+str(cfg.addInVivoThalamus)
 cfg.saveFolder = cfg.workingDir+'/batchData/v103_manualTune'
 cfg.savePickle = False
 cfg.saveJson = True
@@ -205,7 +206,6 @@ cfg.weightLong = {'TPO': 0.5*factor, 'TVL': 0.5*factor, 'S1': 0.5*factor, 'S2': 
 cfg.startLong = 0  # start at 0 ms
 cfg.ratesLong = {'TPO': [0,5], 'TVL': [0,5], 'S1': [0,5], 'S2': [0,5], 'cM1': [0,5], 'M2': [0,5], 'OC': [0,5]}
 
-
 ## input pulses
 cfg.addPulses = 1
 cfg.pulse = {'pop': 'None', 'start': 1000, 'end': 1200, 'rate': 20, 'noise': 0.8}
@@ -265,7 +265,6 @@ cfg.numSampledCellsPerLayer = [len(norm_sampled_depths[(norm_sampled_depths>=cfg
 #------------------------------------------------------------------------------
 # In Vivo thalamic inputs
 #------------------------------------------------------------------------------
-cfg.addInVivoThalamus = False
 
 if cfg.addInVivoThalamus:
 	thalamus_spikes = load_epoched_spikes(Path('data/spikingData'), 'th')

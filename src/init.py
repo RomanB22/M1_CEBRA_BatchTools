@@ -51,8 +51,7 @@ def modifyMechsFunc(simTime):
                         for iseg, seg in enumerate(sec['hObj']):  # set mech params for each segment
                             if sim.cfg.verbose: print('   Modifying %s %s %s by a factor of %f' % (secName, mech, prop, factor))
                             setattr(getattr(seg, mech), prop, getattr(getattr(seg, mech), prop) * factor)
-
-
+#------------------------------------------------------------------------------
 
 cfg, netParams = sim.readCmdLineArgs(simConfigDefault='src/cfg.py', netParamsDefault='src/netParams.py')
 sim.initialize(
@@ -73,12 +72,15 @@ else:
     sim.runSimWithIntervalFunc(cfg.transient+cfg.preTone, modifyMechsFunc)       # run parallel Neuron simulation (calling func to modify mechs)
 
 # # Gather/save data option 1: standard
-# sim.gatherData()
+sim.gatherData()
 
 # Gather/save data option 2: distributed saving across nodes
-sim.saveDataInNodes()
-sim.gatherDataFromFiles()
+# sim.saveDataInNodes()
+# sim.gatherDataFromFiles()
+
+sim.simData['numSampledCellsPerLayer'] = cfg.numSampledCellsPerLayer
 
 sim.saveData()                    			# save params, cell info and sim output to file (pickle,mat,txt,etc)#
 sim.analysis.plotData()         			# plot spike raster etc
 print('completed simulation...')
+
