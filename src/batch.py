@@ -1,6 +1,7 @@
 from netpyne.batch import Batch
 from netpyne import specs
 import numpy as np
+import os
 
 # ----------------------------------------------------------------------------------------------
 # Adaptive Stochastic Descent (ASD)

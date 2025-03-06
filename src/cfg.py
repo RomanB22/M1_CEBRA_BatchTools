@@ -79,14 +79,14 @@ cfg.recordStep = 0.1
 cfg.gpu = False
 cfg.random123 = False
 cfg.progressBar = 0
-cfg.workingDir = os.getcwd()
-cfg.addInVivoThalamus = True
+cfg.workingDir = str(os.getcwd())+'/..'
+cfg.addInVivoThalamus = False
 cfg.simLabel = 'v103_tune1_InVi_MTh'+str(cfg.addInVivoThalamus)
 cfg.saveFolder = cfg.workingDir+'/batchData/v103_manualTune'
 cfg.savePickle = False
 cfg.saveJson = True
 cfg.saveDataInclude = ['simData', 'simConfig', 'netParams']#, 'net']
-cfg.backupCfgFile = None #['cfg.py', 'backupcfg/'] 
+cfg.backupCfgFile = None #['cfg.py', 'backupcfg/']
 cfg.gatherOnlySimData = False
 cfg.saveCellSecs = False
 cfg.saveCellConns = 0
@@ -139,7 +139,7 @@ cfg.synsperconn = {'HH_full': 5, 'HH_reduced': 1, 'HH_simple': 1}
 cfg.AMPATau2Factor = 1.0
 
 #------------------------------------------------------------------------------
-# Network 
+# Network
 #------------------------------------------------------------------------------
 cfg.singleCellPops = 1  # Create pops with 1 single cell (to debug)
 cfg.weightNorm = 1  # use weight normalization
@@ -162,10 +162,10 @@ cfg.EIGain = 1.0
 cfg.IEGain = 1.0
 cfg.IIGain = 1.0
 
-cfg.IEdisynapticBias = None  # increase prob of I->Ey conns if Ex->I and Ex->Ey exist 
+cfg.IEdisynapticBias = None  # increase prob of I->Ey conns if Ex->I and Ex->Ey exist
 
 #------------------------------------------------------------------------------
-## (deprecated) E->I gains 
+## (deprecated) E->I gains
 cfg.EPVGain = 1.0
 cfg.ESOMGain = 1.0
 
@@ -213,7 +213,7 @@ cfg.pulse2 = {'pop': 'None', 'start': 1000, 'end': 1200, 'rate': 20, 'noise': 0.
 
 
 #------------------------------------------------------------------------------
-# Current inputs 
+# Current inputs
 #------------------------------------------------------------------------------
 cfg.addIClamp = 0
 
@@ -221,11 +221,11 @@ cfg.IClamp1 = {'pop': 'IT5B', 'sec': 'soma', 'loc': 0.5, 'start': 0, 'dur': 1000
 
 
 #------------------------------------------------------------------------------
-# NetStim inputs 
+# NetStim inputs
 #------------------------------------------------------------------------------
 cfg.addNetStim = 0
 
- 			   ## pop, sec, loc, synMech, start, interval, noise, number, weight, delay 
+ 			   ## pop, sec, loc, synMech, start, interval, noise, number, weight, delay
 # cfg.NetStim1 = {'pop': 'IT2', 'sec': 'soma', 'loc': 0.5, 'synMech': ['AMPA','NMDA'], 'synMechWeightFactor': cfg.synWeightFractionEE,
 # 				'start': 500, 'interval': 50.0, 'noise': 0.2, 'number': 1000.0/50.0, 'weight': 10.0, 'delay': 1}
 cfg.NetStim1 = {'pop': 'IT2', 'ynorm':[0,1], 'sec': 'soma', 'loc': 0.5, 'synMech': ['AMPA'], 'synMechWeightFactor': [1.0],
@@ -253,7 +253,7 @@ def load_epoched_spikes(path, region):
 	return spikes
 
 
-m1_spikes = load_epoched_spikes(Path('data/spikingData'), 'm1')
+m1_spikes = load_epoched_spikes(Path(cfg.workingDir+'/data/spikingData'), 'm1')
 norm_sampled_depths = m1_spikes.attrs['cell_depths']/cfg.sizeY
 norm_sampled_depths[norm_sampled_depths>=1] = 0.99
 
@@ -267,7 +267,7 @@ cfg.numSampledCellsPerLayer = [len(norm_sampled_depths[(norm_sampled_depths>=cfg
 #------------------------------------------------------------------------------
 
 if cfg.addInVivoThalamus:
-	thalamus_spikes = load_epoched_spikes(Path('data/spikingData'), 'th')
+	thalamus_spikes = load_epoched_spikes(Path(cfg.workingDir+'/data/spikingData'), 'th')
 	cfg.Trial = int( max(np.unique(thalamus_spikes['trial']))/2. ) # Pick the half trial as inputs
 
 	preToneTime = abs(thalamus_spikes.attrs['trial_window'][0])*1000
