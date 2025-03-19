@@ -66,7 +66,7 @@ cfg.recordTraces = {'V_soma': {'sec':'soma', 'loc':0.5, 'var':'v'}}#,
 					# 'V_dend_5': {'sec':'dend_5', 'loc':0.5, 'var':'v', 'conds':{'pop': 'PT5B'}}}
 					#'I_AMPA_Adend2': {'sec':'Adend2', 'loc':0.5, 'synMech': 'AMPA', 'var': 'i'}}
 
-cfg.recordLFP = [[150, y, 150] for y in range(200,1300,100)]
+#cfg.recordLFP = [[150, y, 150] for y in range(200,1300,100)]
 
 cfg.recordStim = False
 cfg.recordTime = False  
@@ -316,8 +316,8 @@ cfg.analysis['plotRaster'] = {'include': allpops, 'orderBy': ['pop', 'y'], 'time
 cfg.analysis['plotSpikeHist'] = {'include': ['IT2','IT4','IT5A','IT5B','PT5B','IT6','CT6'], 'timeRange': timeRange, 'yaxis':'rate', 'binSize':5, 'graphType':'bar',
  								'saveFig': True, 'showFig': False, 'popColors': popColors, 'figSize': (10,4), 'dpi': 300}
 
-cfg.analysis['plotLFP'] = {'plots': ['spectrogram'], 'figSize': (6,10), 'timeRange': timeRange, 'NFFT': 256*20, 'noverlap': 128*20, 'nperseg': 132*20,
-							'saveFig': True, 'showFig':False}
+#cfg.analysis['plotLFP'] = {'plots': ['spectrogram'], 'figSize': (6,10), 'timeRange': timeRange, 'NFFT': 256*20, 'noverlap': 128*20, 'nperseg': 132*20,
+#							'saveFig': True, 'showFig':False}
 
 
 cfg.analysis['plotTraces'] = {'include': cfg.recordCells, 'timeRange': timeRange, 'overlay': True, 'oneFigPer': 'trace', 'figSize': (10,4), 'saveFig': True, 'showFig': False}
