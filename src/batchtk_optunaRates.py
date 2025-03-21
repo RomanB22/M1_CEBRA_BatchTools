@@ -42,7 +42,7 @@ search(job_type = 'sge', # or sh
 setup = """
 source ~/.bashrc
 source ~/default.sh
-conda activate NetPyNE
+conda activate M1_batchTools
 export LD_LIBRARY_PATH="/home/rbaravalle/.conda/envs/NetPyNE/lib/python3.10/site-packages/mpi4py_mpich.libs/"
 """
 slurm_config = {
