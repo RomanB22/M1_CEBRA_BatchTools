@@ -68,7 +68,7 @@ results = search(job_type = 'slurm', # or 'sh'
        metric = 'loss', # if a metric and mode is specified, the search will collect metric data and report on the optimal configuration
        mode = 'min',
        algorithm = "optuna",
-       max_concurrent = 3,
+       max_concurrent = 1,
        remote_dir='/home/rbaravalle/M1_CEBRA_BatchTools/src',
        host='expanse0',
        key='###',
