@@ -79,6 +79,11 @@ cfg.recordStep = 0.1
 cfg.gpu = False
 cfg.coreneuron = False
 cfg.random123 = False
+# For GPU use
+#cfg.rand123GlobalIndex = None
+#cfg.coreneuron = True
+#cfg.random123 = True
+
 cfg.progressBar = 0
 cfg.workingDir = str(os.getcwd())+'/..'
 cfg.addInVivoThalamus = False
