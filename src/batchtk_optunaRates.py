@@ -14,6 +14,7 @@ params = {'weightLong.TPO': [0.25, 0.75],
           'IIweights.1': [0.5, 1.5],
           'IIweights.2': [0.5, 1.5],
           }
+"""
 # SGE CONFIG
 sge_config = {
     'queue': 'cpu.q',
@@ -36,7 +37,7 @@ search(job_type = 'sge', # or sh
        mode = 'min',
        algorithm = 'optuna',
        max_concurrent = 1)
-
+"""
 
 # EXPANSE CONFIG
 setup = """
@@ -68,8 +69,8 @@ results = search(job_type = 'slurm', # or 'sh'
        mode = 'min',
        algorithm = "optuna",
        max_concurrent = 3,
-       remote_dir='/home/jchen12/dev/CA3',
-       host='grid0',
+       remote_dir='/home/rbaravalle/M1_CEBRA_BatchTools/src',
+       host='expanse0',
        key='###',
-       num_samples=200,
+       num_samples=1,
        )
