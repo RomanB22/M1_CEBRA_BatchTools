@@ -17,7 +17,7 @@ params = {'weightLong.TPO': [0.25, 0.75],
 """
 # SGE CONFIG
 sge_config = {
-    'queue': 'cpu.q',
+    'queue': 'gpu.q',
     'cores': 19,
     'vmem': '90G', #90G
     'realtime': '15:00:00',
