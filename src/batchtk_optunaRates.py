@@ -62,7 +62,7 @@ results = search(job_type = 'slurm', # or 'sh'
        comm_type = 'ssh', # if a metric and mode is specified, some method of communicating with the host needs to be defined
        label = 'optuna',
        params = params,
-       output_path = '../batchData/grid_batch',
+       output_path = '../batchData/optuna_batch',
        checkpoint_path = '../batchData/ray',
        run_config = slurm_config,
        metric = 'loss', # if a metric and mode is specified, the search will collect metric data and report on the optimal configuration
