@@ -77,6 +77,7 @@ cfg.recordStep = 0.1
 # Saving
 #------------------------------------------------------------------------------
 cfg.gpu = False
+cfg.coreneuron = False
 cfg.random123 = False
 cfg.progressBar = 0
 cfg.workingDir = str(os.getcwd())+'/..'
