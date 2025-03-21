@@ -15,13 +15,13 @@ params = {'weightLong.TPO': [0.25, 0.75],
           'IIweights.2': [0.5, 1.5],
           }
 """
-# SGE CONFIG
+# SGE GPU CONFIG
 sge_config = {
     'queue': 'gpu.q',
     'cores': 19,
     'vmem': '90G', #90G
     'realtime': '15:00:00',
-    'command': 'mpiexec -n $NSLOTS -hosts $(hostname) nrniv -python -mpi init.py'}
+    'command': 'mpiexec -n $NSLOTS -hosts $(hostname) ./x86_64/special -python -mpi init.py'}
 
 run_config = sge_config
 
