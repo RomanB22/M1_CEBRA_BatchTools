@@ -42,8 +42,8 @@ search(job_type = 'sge', # or sh
 setup = """
 source ~/.bashrc
 source ~/default.sh
-source ~/conda.sh
-conda activate netpyne
+conda activate NetPyNE
+export LD_LIBRARY_PATH="/home/rbaravalle/.conda/envs/NetPyNE/lib/python3.10/site-packages/mpi4py_mpich.libs/"
 """
 slurm_config = {
     'allocation': 'TG-MED240058',
